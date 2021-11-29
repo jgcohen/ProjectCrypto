@@ -1,9 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Hello HomeController!{% endblock
+%} {% block body %}
+<h1 class="text-danger">Hello</h1>
+<div class="container">
+  <div class="row">
+    {% for item in data.data %}
 
-{% block title %}Hello HomeController!{% endblock %}
+    <div class="col-4">
+      <div class="card mb-2">
+        <div class="card-header">
+          {{ item.name }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ item.quote.USD.price |number_format(2 )}}$/unité
+          </h5>
+          <a href="#" class="btn btn-primary">Acheter</a>
+        </div>
+      </div>
+    </div>
 
-{% block body %}
-
-{{data.data[0].name}}
-{{data.data[0].quote.USD.price}}
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
