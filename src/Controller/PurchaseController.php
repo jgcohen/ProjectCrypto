@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use DateTimeImmutable;
 use App\Form\PurchaseType;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CallApiService;
 
 
 class PurchaseController extends AbstractController
@@ -34,6 +35,17 @@ class PurchaseController extends AbstractController
         }
         return $this->render('purchase/index.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/purchases", name="purchases")
+     */
+    public function show( CallApiService $callApiService): Response
+    {
+        $purchases = $this->entityManager->getRepository(Purchase::class)->findAll();
+        return $this->render('purchase/show.html.twig', [
+            'purchases' => $purchases,
+            'data' => $callApiService->getData()
         ]);
     }
 }
