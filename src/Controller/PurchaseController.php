@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Gains;
 use App\Entity\Purchase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use DateTimeImmutable;
 use App\Form\PurchaseType;
+use App\Form\GainType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\CallApiService;
 
@@ -22,10 +24,10 @@ class PurchaseController extends AbstractController
     /**
      * @Route("/purchase", name="purchase")
      */
-    public function index( Request $request): Response
+    public function index(Request $request): Response
     {
         $purchase =  new Purchase();
-        $form = $this->createForm(PurchaseType::class,$purchase);
+        $form = $this->createForm(PurchaseType::class, $purchase);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $purchase->setUser($this->getUser());
@@ -40,12 +42,22 @@ class PurchaseController extends AbstractController
     /**
      * @Route("/purchases", name="purchases")
      */
-    public function show( CallApiService $callApiService): Response
+    public function show(CallApiService $callApiService, Request $request): Response
     {
+        $gain =  new Gains();
+        $form = $this->createForm(GainType::class, $gain);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gain->setUser($this->getUser());
+            $gain->setCreatedAt(new DateTimeImmutable());
+            $this->entityManager->persist($gain);
+            $this->entityManager->flush();
+        }
         $purchases = $this->entityManager->getRepository(Purchase::class)->findAll();
         return $this->render('purchase/show.html.twig', [
             'purchases' => $purchases,
-            'data' => $callApiService->getData()
+            'data' => $callApiService->getData(),
+            'form' => $form->createView()
         ]);
     }
 }

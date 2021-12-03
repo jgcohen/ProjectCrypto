@@ -4,29 +4,31 @@
 {% endblock %}
 
 {% block body %}
-
-
-{% set total = null %} {% for purchase in purchases %}
+{% set total = null %}
+{% for purchase in purchases %}
 	<div class="row">
-		<div class="col-4">
+		<div class="col-3">
 			<div class="card mb-2">
 				<div class="card-header">
 					{{ purchase.currency }}
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">
+						Quantity purchased:
 						{{purchase.quantity}}
-						X
-						{{ purchase.price |number_format(2 )}}$
+						<br>
+						<br>
+						Price at the time:{{ purchase.price |number_format(2 )}}$
 					</h5>
 
-					<h4>
+					<h5>
+						Total purchased:
 						{{purchase.quantity * purchase.price}}$</h4>
 
 				</div>
 			</div>
 		</div>
-		<div class="col-4">
+		<div class="col-3">
 			<div class="card mb-2">
 				{% for item in data.data %}
 					{% if item.name is same as purchase.currency %}
@@ -44,14 +46,15 @@
 
 					</div>
 				</div>
-			</div>
+		<div class="col-3">
+			{% set total = total + ((item.quote.USD.price - purchase.price)* purchase.quantity) %}
+			Difference: {{((item.quote.USD.price - purchase.price)* purchase.quantity)|number_format(2 ) }}$
 		</div>
-		<div class="col-4">
-			{{((item.quote.USD.price - purchase.price)* purchase.quantity)|number_format(2 ) }}
-            {% set total = total + ((item.quote.USD.price - purchase.price)* purchase.quantity) %}
+			</div>
 		</div>
 	</div>
 {% endif %}{% endfor %}{% endfor %}
-
-<h1>{{total|number_format(2 )}}</h1>
-{% endblock %}
+{{form_start(form)}}
+{{ form_row(form.value, { 'value': total|number_format(2 , '.', '') }) }}
+{{form_end(form)}}
+<h1>Total Difference: {{total|number_format(2 )}}$</h1>{% endblock %}

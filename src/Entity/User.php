@@ -42,9 +42,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $purchases;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Gains::class, mappedBy="user")
+     */
+    private $gains;
+
     public function __construct()
     {
         $this->purchases = new ArrayCollection();
+        $this->gains = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($purchase->getUser() === $this) {
                 $purchase->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gains[]
+     */
+    public function getGains(): Collection
+    {
+        return $this->gains;
+    }
+
+    public function addGain(Gains $gain): self
+    {
+        if (!$this->gains->contains($gain)) {
+            $this->gains[] = $gain;
+            $gain->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGain(Gains $gain): self
+    {
+        if ($this->gains->removeElement($gain)) {
+            // set the owning side to null (unless already changed)
+            if ($gain->getUser() === $this) {
+                $gain->setUser(null);
             }
         }
 
