@@ -5,12 +5,16 @@
 
 {% block body %}
 {% set total = null %}
+{% if app.user %}
 {% for purchase in purchases %}
+
+{% if app.user.id is same as purchase.user.id %}
 	<div class="row">
 		<div class="col-3">
 			<div class="card mb-2">
 				<div class="card-header">
 					{{ purchase.currency }}
+					{{purchase.user.id}}
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">
@@ -53,8 +57,11 @@
 			</div>
 		</div>
 	</div>
-{% endif %}{% endfor %}{% endfor %}
+
+{% endif %}{% endfor %}	{% endif %}{% endfor %}
+<div class="visually-hidden">
 {{form_start(form)}}
 {{ form_row(form.value, { 'value': total|number_format(2 , '.', '') }) }}
 {{form_end(form)}}
-<h1>Total Difference: {{total|number_format(2 )}}$</h1>{% endblock %}
+</div>
+<h1>Total Difference: {{total|number_format(2 )}}$</h1>{% endif %}{% endblock %}

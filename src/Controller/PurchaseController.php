@@ -26,6 +26,7 @@ class PurchaseController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        
         $purchase =  new Purchase();
         $form = $this->createForm(PurchaseType::class, $purchase);
         $form->handleRequest($request);
@@ -44,6 +45,7 @@ class PurchaseController extends AbstractController
      */
     public function show(CallApiService $callApiService, Request $request): Response
     {
+        // var_dump($this);
         $gain =  new Gains();
         $form = $this->createForm(GainType::class, $gain);
         $form->handleRequest($request);
