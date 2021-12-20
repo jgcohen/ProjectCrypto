@@ -29,7 +29,7 @@ class Gains
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gains")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 

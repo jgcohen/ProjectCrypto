@@ -45,6 +45,8 @@ class PurchaseController extends AbstractController
      */
     public function show(CallApiService $callApiService, Request $request): Response
     {
+        // $myDatas = $callApiService->getData()['data'];
+        // $name=[];
         // var_dump($this);
         $gain =  new Gains();
         $form = $this->createForm(GainType::class, $gain);
@@ -56,6 +58,17 @@ class PurchaseController extends AbstractController
             $this->entityManager->flush();
         }
         $purchases = $this->entityManager->getRepository(Purchase::class)->findAll();
+//         foreach ( $myDatas as $value ){
+//             foreach ($purchases as $purchase){
+//                 if($value['name'] == $purchase->getCurrency()){
+
+//                     array_push($name, ((($value['quote']['USD']['price']-$purchase->getPrice())*$purchase->getQuantity())));
+//                 }
+//             }
+//         }
+//         $total = 0;
+// foreach($name as $val) $total += $val;
+//     //    dd($total);
         return $this->render('purchase/show.html.twig', [
             'purchases' => $purchases,
             'data' => $callApiService->getData(),

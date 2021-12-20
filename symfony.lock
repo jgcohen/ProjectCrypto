@@ -82,11 +82,27 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "dragonmantank/cron-expression": {
+        "version": "v3.1.0"
+    },
     "egulias/email-validator": {
         "version": "3.1.2"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
+    },
+    "jmose/command-scheduler-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "a1d79fcdbfc453e4319171a2b6a3d5dd402421c7"
+        },
+        "files": [
+            "./config/packages/scheduler.yaml",
+            "./config/routes/scheduler.yaml"
+        ]
     },
     "laminas/laminas-code": {
         "version": "4.4.3"
@@ -508,6 +524,9 @@
     },
     "symfony/string": {
         "version": "v5.3.10"
+    },
+    "symfony/templating": {
+        "version": "v5.3.7"
     },
     "symfony/translation": {
         "version": "5.3",
