@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %} {% block title %}Hello HomeController!{% endblock
 %} {% block body %}
-<h1 class="text-danger">Hello{% if app.user %} {{app.user.email}} {% endif %}</h1>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{path('purchases')}}">
+      Mes achats
+    </a>
+  </div>
+</nav>
 <div class="container">
   <div class="row">
     {% for item in data.data %}
@@ -14,7 +20,7 @@
           <h5 class="card-title">
             {{ item.quote.USD.price |number_format(2 )}}$/unité
           </h5>
-          <a href="#" class="btn btn-primary">Acheter</a>
+          <a href="{{path('purchase')}}" class="btn btn-primary">Acheter</a>
         </div>
       </div>
     </div>

@@ -58,6 +58,7 @@ class RegisterGainCommand extends Command
         }
         $total = 0;
         foreach ($gains as $totalGain) $total += $totalGain;
+        
         $gain->setCreatedAt(new DateTimeImmutable());
         $gain->setValue($total);
         $this->entityManager->persist($gain);

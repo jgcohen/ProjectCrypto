@@ -4,64 +4,75 @@
 {% endblock %}
 
 {% block body %}
-{% set total = null %}
-{% if app.user %}
-{% for purchase in purchases %}
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{path('purchase')}}">
+      Acheter
+    </a>
+  </div>
+</nav>
+	{# {% if app.user %} #}
+		{{totalGain  |number_format(2 )}}
+		Euros
+		{% for purchase in purchases %}
 
-{% if app.user.id is same as purchase.user.id %}
-	<div class="row">
-		<div class="col-3">
-			<div class="card mb-2">
-				<div class="card-header">
-					{{ purchase.currency }}
-					{{purchase.user.id}}
+			{# {% if app.user.id is same as purchase.user.id %} #}
+			<div class="row">
+				<div class="col-6">
+					<a href="{{path('single',{'id':purchase.id})}}">{{ purchase.currency }}</a>
 				</div>
-				<div class="card-body">
-					<h5 class="card-title">
-						Quantity purchased:
-						{{purchase.quantity}}
-						<br>
-						<br>
-						Price at the time:{{ purchase.price |number_format(2 )}}$
-					</h5>
-
-					<h5>
-						Total purchased:
-						{{purchase.quantity * purchase.price}}$</h4>
-
+				<div class="col-6">
+					{% for item in data.data %}
+						{% if item.name is same as purchase.currency %}
+							{% if purchase.price < item.quote.USD.price  %}
+								+
+							{% else %}
+								-
+							{% endif %}
+						{% endif %}
+					{% endfor %}
 				</div>
+
+				{# <div class="card-body">
+												<h5 class="card-title">
+													Quantity purchased:
+													{{purchase.quantity}}
+													<br>
+													<br>
+													Price at the time:{{ purchase.price |number_format(2 )}}$
+												</h5>
+							
+												<h5>
+													Total purchased:
+													{{purchase.quantity * purchase.price}}$</h4>
+							
+											</div> #}
+				{# </div>
+									</div>
+									<div class="col-3">
+										<div class="card mb-2">
+											{% for item in data.data %}
+												{% if item.name is same as purchase.currency %}
+													<div class="card-header">
+														{{ item.name }}
+													</div>
+													<div class="card-body">
+														<h5 class="card-title">
+															Current value:
+															{{ item.quote.USD.price|number_format(2 )}}$
+														</h5>
+							
+							
+													</div>
+							
+												</div>
+											</div>
+										</div>
+									</div> #}
 			</div>
-		</div>
-		<div class="col-3">
-			<div class="card mb-2">
-				{% for item in data.data %}
-					{% if item.name is same as purchase.currency %}
-						<div class="card-header">
-							{{ item.name }}
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">
-								Current value:
-								{{ item.quote.USD.price|number_format(2 )}}$
-							</h5>
+			{# {% endif %} #}
 
-
-						</div>
-
-					</div>
-				</div>
-		<div class="col-3">
-			{% set total = total + ((item.quote.USD.price - purchase.price)* purchase.quantity) %}
-			Difference: {{((item.quote.USD.price - purchase.price)* purchase.quantity)|number_format(2 ) }}$
-		</div>
-			</div>
-		</div>
-	</div>
-
-{% endif %}{% endfor %}	{% endif %}{% endfor %}
-<div class="visually-hidden">
-{{form_start(form)}}
-{{ form_row(form.value, { 'value': total|number_format(2 , '.', '') }) }}
-{{form_end(form)}}
-</div>
-<h1>Total Difference: {{total|number_format(2 )}}$</h1>{% endif %}{% endblock %}
+			{# {% endfor %} #}
+		{% endfor %}
+	{# {% endif %} #}
+{% endblock %}

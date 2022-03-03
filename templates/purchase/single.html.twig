@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Achat 
+{% endblock %}
+
+{% block body %}
+
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{purchase.currency}}</li>
+    <li class="list-group-item">Quantité: {{purchase.quantity}}</li>
+    <li class="list-group-item">Prix d'achat: {{ purchase.price |number_format(2 )}}</li>
+     <li class="list-group-item">Total acheté: {{purchase.quantity * purchase.price}}$</li>
+  </ul>
+  <a href="{{path('edit',{'id':purchase.id})}}">Editer</a>
+</div>
+{% endblock %}
