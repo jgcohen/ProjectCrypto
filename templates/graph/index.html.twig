@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Achat 
-{% endblock %}
+{% block title %}Hello GraphController!{% endblock %}
 
 {% block body %}
 <nav class="navbar navbar-light bg-light">
@@ -11,8 +10,7 @@
     </a>
   </div>
 </nav>
-<div class="mx-auto text-center w-25">
-{{form_start(form)}}
-{{form_end(form)}}
-  </div>
+<div class='w-50 mx-auto pt-5'>
+{{ render_chart(chart) }}
+</div>
 {% endblock %}

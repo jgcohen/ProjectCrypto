@@ -32,7 +32,7 @@ class Gains
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
-
+   
     public function getId(): ?int
     {
         return $this->id;

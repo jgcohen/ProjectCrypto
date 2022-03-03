@@ -7,17 +7,28 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
 		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
+            	<style>
+		.bg-black {
+			background-color: #100f0f;
+            color: #efefef;
+		}
+
+        .bg-minsize{
+min-height: 600px;
+        }
+
+	</style>
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body><div class="container-fluid bg-black bg-minsize" >
         {% block body %}{% endblock %}
+        </div>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 			<script src="{{asset('assets/js/bootstrap.bundle.js')}}"></script>
-    </body>
-</html>
+            <script s
