@@ -3,14 +3,8 @@
 {% block title %}Hello GraphController!{% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{path('purchases')}}">
-      Mes achats
-    </a>
-  </div>
-</nav>
-<div class='w-50 mx-auto pt-5'>
+
+<div class='mx-auto pt-5'>
 {{ render_chart(chart) }}
 </div>
 {% endblock %}

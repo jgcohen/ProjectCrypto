@@ -4,24 +4,21 @@
 {% endblock %}
 
 {% block body %}
-	<nav class="navbar navbar-light bg-light">
-		<div class="container-fluid">
-			<a  class="navbar-brand" href="{{path('purchase')}}">
-				Acheter
-			</a>
-		</div>
-	</nav>
-	<div class="mx-auto text-center">
+
+	<div class=" mx-auto text-center">
 	<a class="btn text-light" href="{{path('graph')}}">	<h2 class="my-4">
 			{{totalGain  |number_format(2 )}}
 			Euros
 		</h2> </a>
 		{% for purchase in purchases %}
-			<div class="row border-bottom border-light w-25 text-center mx-auto my-2">
-				<div class="col-6">
+			<div class="row border-bottom border-light text-center mx-auto my-2">
+				<div class="col-3">
+					
+				</div>
+				<div class="col-3">
 					<a class="btn text-light" href="{{path('single',{'id':purchase.id})}}">{{ purchase.currency }}</a>
 				</div>
-				<div class="col-6">
+				<div class="col-3">
 					{% for item in data.data %}
 						{% if item.name is same as purchase.currency %}
 							{% if purchase.price < item.quote.USD.price  %}

@@ -16,7 +16,7 @@ use DateTimeImmutable;
 class RegisterGainCommand extends Command
 {
     protected static $defaultName = 'app:registerGain';
-    protected static $defaultDescription = 'Allow to add a the gain of the day';
+    protected static $defaultDescription = 'Allow to add the gain of the day';
     public function __construct(HttpClientInterface $client,EntityManagerInterface $entityManager)
     {
         $this->client = $client;
