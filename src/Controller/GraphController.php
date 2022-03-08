@@ -17,7 +17,7 @@ class GraphController extends AbstractController
         $this->entityManager = $entityManager;
     }
     /**
-     * @Route("/", name="graph")
+     * @Route("/graph", name="graph")
      */
     public function index(ChartBuilderInterface $chartBuilder): Response
     {

@@ -4,16 +4,16 @@
   <div class="row">
     {% for item in data.data %}
 
-    <div class="col-4">
+    <div class="col-6 col-md-4">
       <div class="card mb-2 bg-black">
         <div class=" bg-black card-header">
           {{ item.name }}
         </div>
         <div class=" bg-black card-body">
           <h5 class="bg-black card-title">
-            {{ item.quote.USD.price |number_format(2 )}}$/unité
+            {{ item.quote.USD.price |number_format(2 )}}€/unité
           </h5>
-          <a href="{{path('purchase')}}" class="btn btn-primary">Acheter</a>
+          <a href="{{path('purchase')}}" class="btn btn-light">Acheter</a>
         </div>
       </div>
     </div>

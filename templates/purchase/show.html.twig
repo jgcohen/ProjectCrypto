@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div class=" mx-auto text-center">
-	<a class="btn text-light" href="{{path('graph')}}">	<h2 class="my-4">
+	<a class="btn text-light font-weight-bold" href="{{path('graph')}}">	<h2 class="my-4">
 			{{totalGain  |number_format(2 )}}
 			Euros
 		</h2> </a>
@@ -16,7 +16,7 @@
 					
 				</div>
 				<div class="col-3">
-					<a class="btn text-light" href="{{path('single',{'id':purchase.id})}}">{{ purchase.currency }}</a>
+					<a class="btn text-light font-weight-bold" href="{{path('single',{'id':purchase.id})}}">{{ purchase.currency }}</a>
 				</div>
 				<div class="col-3">
 					{% for item in data.data %}
