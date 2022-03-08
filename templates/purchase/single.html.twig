@@ -11,15 +11,15 @@
 				<li class="list-group-item bg-black">Quantité:
 					{{purchase.quantity}}</li>
 				<li class="list-group-item bg-black">Prix d'achat:
-					{{ purchase.price |number_format(2 )}}$</li>
+					{{ purchase.price |number_format(2 )}}€</li>
 					{% for item in data.data %}
 					{% if item.name is same as purchase.currency %}
 					<li class="list-group-item bg-black">Prix actuel:
-					{{ item.quote.USD.price |number_format(2 )}}$</li>
+					{{ item.quote.USD.price |number_format(2 )}}€</li>
 					{% endif %}
 					{% endfor %}
 				<li class="list-group-item bg-black">Total acheté:
-					{{purchase.quantity * purchase.price}}$</li>
+					{{purchase.quantity * purchase.price}}€</li>
           <li class="list-group-item bg-black"><a href="{{path('edit',{'id':purchase.id})}}">Editer</a></li>
 			</ul>
 		</div>
