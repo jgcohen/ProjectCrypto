@@ -106,12 +106,13 @@ class PurchaseController extends AbstractController
      /**
      * @Route("/purchase/{id}", name="single")
      */
-    public function single($id): Response
+    public function single($id,CallApiService $callApiService): Response
     {
         $purchase = $this->entityManager->getRepository(Purchase::class)->find($id);
         
         return $this->render('purchase/single.html.twig', [
             'purchase' => $purchase,
+            'data' => $callApiService->getData(),
         ]);
     }
 }
